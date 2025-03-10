@@ -1,0 +1,12 @@
+{
+    "Name": "ebs-snapshot-cleanup-rule",
+    "ScheduleExpression": "cron(0 0 * * ? *)",
+    "State": "ENABLED",
+    "Description": "Triggers the EBS snapshot cleanup Lambda function daily.",
+    "Targets": [
+      {
+        "Id": "ebs-snapshot-cleanup-lambda",
+        "Arn": "arn:aws:lambda:REGION:ACCOUNT_ID:function:ebs-snapshot-cleanup"
+      }
+    ]
+  }
