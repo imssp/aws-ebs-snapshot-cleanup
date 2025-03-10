@@ -23,6 +23,23 @@ def lambda_handler(event, context):
                 for volume in instance.get('BlockDeviceMappings', []):
                     active_volumes.add(volume['Ebs']['VolumeId'])
 
+        # Identifying stale snapshots
+        stale_snapshots = []
+        for snapshot in snapshots:
+            volume_id = snapshot.get('VolumeId')
+            if volume_id and volume_id not in active_volumes:
+                stale_snapshots.append(snapshot['SnapshotId'])
+
+        # Deleting stale snapshots
+        for snapshot_id in stale_snapshots:
+            ec2.delete_snapshot(SnapshotId=snapshot_id)
+            logger.info(f"Deleted stale snapshot: {snapshot_id}")
+
+        return {
+            'statusCode': 200,
+            'body': f"Deleted {len(stale_snapshots)} stale snapshots."
+        }
+
     except Exception as e:
         logger.error(f"Error: {str(e)}")
         raise e
