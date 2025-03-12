@@ -1,8 +1,6 @@
+
 # AWS EBS Snapshot Cleanup
-
 This project automates the cleanup of stale Amazon Elastic Block Store (EBS) snapshots in an AWS account to optimize storage costs. It uses an AWS Lambda function to identify and delete snapshots that are no longer associated with active EC2 instances.
-
----
 
 ## Features
 - **Automated Cleanup**: Identifies and deletes stale EBS snapshots.
@@ -10,9 +8,8 @@ This project automates the cleanup of stale Amazon Elastic Block Store (EBS) sna
 - **Scheduled Execution**: Runs daily using Amazon CloudWatch Events.
 - **Infrastructure as Code**: Uses Terraform to automate the deployment of AWS resources.
 
----
-
 ## Repository Structure
+```bash
 aws-ebs-snapshot-cleanup/
 │
 ├── lambda_function/                # Contains the AWS Lambda function code
@@ -28,17 +25,13 @@ aws-ebs-snapshot-cleanup/
 │
 ├── README.md                       # Project documentation
 └── requirements.txt                # Python dependencies for the Lambda function
-
----
-
+```
 ## How It Works
 1. The **Lambda function** fetches all EBS snapshots owned by the account.
 2. It retrieves a list of active EC2 instances (both running and stopped).
 3. For each snapshot, it checks if the associated volume is not attached to any active instance.
 4. If a snapshot is stale (i.e., its volume is not in use), it deletes the snapshot.
 5. The process is automated using a **CloudWatch Event rule** that triggers the Lambda function daily.
-
----
 
 ## Prerequisites
 Before deploying the project, ensure you have the following:
@@ -47,11 +40,9 @@ Before deploying the project, ensure you have the following:
 - **Python 3.8**: Installed on your local machine (for testing the Lambda function).
 - **Terraform**: Installed to automate infrastructure deployment.
 
----
-
 ## Deployment Steps
-
-1. Clone the Repository
+```bash
+  1. Clone the Repository
     git clone https://github.com/your-username/aws-ebs-snapshot-cleanup.git
     cd aws-ebs-snapshot-cleanup
 
@@ -80,4 +71,5 @@ Confirm the deployment by typing yes when prompted.
 5. Clean Up
     To delete all resources created by Terraform:
         terraform destroy
+```
 
