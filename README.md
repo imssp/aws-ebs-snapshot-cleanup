@@ -37,7 +37,7 @@ aws-ebs-snapshot-cleanup/
 Before deploying the project, ensure you have the following:
 - **AWS Account**: With permissions to create Lambda functions, IAM roles, and CloudWatch Events.
 - **AWS CLI**: Installed and configured with your credentials.
-- **Python 3.8**: Installed on your local machine (for testing the Lambda function).
+- **Python 3.8**: Installed on your local machine(for testing the Lambda function).
 - **Terraform**: Installed to automate infrastructure deployment.
 
 ## Deployment Steps
